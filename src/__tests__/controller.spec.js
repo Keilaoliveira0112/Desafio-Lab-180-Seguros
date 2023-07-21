@@ -7,6 +7,7 @@ jest.mock('../db.js', () => ({
   insertPolicyholder: jest.fn()
 }));
 
+// retorna todos os segurados
 test('getAllPolicyholders should return all policyholders', () => {
   const mockRequest = {};
   const mockResponse = {
@@ -22,6 +23,8 @@ test('getAllPolicyholders should return all policyholders', () => {
     { id: 201, name: 'Marina' },
   ]);
 });
+
+
 
 // mostra apenas o id informado
 test('getPolicyholderById should return the selected policyholder', () => {
@@ -41,6 +44,8 @@ test('getPolicyholderById should return the selected policyholder', () => {
   ]);
 });
 
+
+
 // teste de criação
   test('createPolicyholder should return 400 when an empty request is provided', () => {
     const mockRequestEmpty = {};
@@ -52,6 +57,8 @@ test('getPolicyholderById should return the selected policyholder', () => {
     createPolicyholder(mockRequestEmpty, mockResponse);
     expect(mockResponse.status).toHaveBeenCalledWith(400);
   });
+
+  // retornar 404 se o segurado não for encontrado
 
   test('getPolicyholderById should return 404 if policyholder is not found', () => {
     const mockRequestInvalid = {
@@ -68,6 +75,9 @@ test('getPolicyholderById should return the selected policyholder', () => {
     expect(mockResponse.status).toHaveBeenCalledWith(404);
     expect(mockResponse.json).toHaveBeenCalled();
   });
+
+  
+  // criar um novo segurado
 
   test('createPolicyholder should create a new policyholder', () => {
     const mockRequest = {
